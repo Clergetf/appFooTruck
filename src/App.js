@@ -1,23 +1,91 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import Header from './component/Header';
+import Main from './component/Main';
+import Basket from './component/Basket';
+import data from './data';
+import Button from './component/Button';
+import { useState } from 'react';
 
 function App() {
+  const {products} = data
+  const [cartItems, setCartItems] = useState([])
+  const onAdd = (product) => {
+    const exist = cartItems.find(x => x.id === product.id)
+    if(exist) {
+      setCartItems(cartItems.map(x => x.id === product.id ? {...exist, qty: exist.qty + 1} : x ))
+    } else {
+      setCartItems([...cartItems, {...product, qty: 1}])
+    }
+  }
+
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id)
+    if(exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id))
+    } else {
+      setCartItems(cartItems.map(x => x.id === product.id ? {...exist, qty: exist.qty - 1} : x ))
+    }
+  }
+
+// filtre 
+
+const categories2 = products.filter(product => product.category2 !== '')
+
+const allCategories = ['All', ...new Set(products.map(product => product.category)), ...new Set(categories2.map(product => product.category2))]
+
+
+const [menuItem, setMenuItem] = useState(products);
+
+const [buttons] = useState(allCategories);
+
+
+    const filter = (button) => {
+
+        if (button === 'All') {
+            setMenuItem(products)
+            return
+        } 
+
+
+        const filter1 = products.filter(function(product) {
+          if (product.category === button || product.category2 === button) {
+            return true
+          }
+          return false
+        })
+
+        //const filter1 = products.filter(product => product.category === button)
+        //const filter2 = products.filter(product => product.category2 === button)
+        
+        const filteredData = filter1 
+
+        setMenuItem(filteredData)
+
+    }
+
+      /* var filter = {
+        category,
+        category2
+      }
+
+      filter1 = product.filter(function(product) {
+        for (var key in filter) {
+          if (filter[key] === button)
+          true
+        }
+        return false
+      })
+
+      */
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header countCartItems={cartItems.length}></Header>
+      <Button button={buttons} filter={filter}/>
+      <div className="row">
+        <Main menuItem={menuItem}onAdd={onAdd} products={products}></Main>
+        <Basket onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Basket>
+      </div>
     </div>
   );
 }
