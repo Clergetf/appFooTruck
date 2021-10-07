@@ -54,29 +54,12 @@ const [buttons] = useState(allCategories);
           return false
         })
 
-        //const filter1 = products.filter(product => product.category === button)
-        //const filter2 = products.filter(product => product.category2 === button)
         
         const filteredData = filter1 
 
         setMenuItem(filteredData)
 
     }
-
-      /* var filter = {
-        category,
-        category2
-      }
-
-      filter1 = product.filter(function(product) {
-        for (var key in filter) {
-          if (filter[key] === button)
-          true
-        }
-        return false
-      })
-
-      */
 
   return (
     <div className="App">

@@ -7,15 +7,16 @@ import useModal from './useModal';
  
 export default function Product(props) {
     const {onAdd, menuItem} = props
-    const {isShowing, toggle} = useModal();
+    const {isShowing, toggle, isProduct} = useModal();
 
     return (
             <div className="row space-between">
+                <Modal product={isProduct} isShowing={isShowing} hide={toggle}/>
+
                     {
                         menuItem.map((product) => {       
                         return <div key={product.name}className="product">
-                            <Modal product={product} isShowing={isShowing} hide={toggle}/>
-                            <button  onClick={toggle} > Description</button>
+                            <button  onClick={(e) => toggle(product)} > Description</button>
                             <img className="small" src={product.image} alt={product.name}></img>
                             <h3>{product.name}</h3>
                             <div>€{product.price}</div>
@@ -25,7 +26,6 @@ export default function Product(props) {
                         </div> 
                         })
                     }
-                    
             </div>
     )
 }
