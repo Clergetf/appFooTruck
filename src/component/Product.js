@@ -11,13 +11,12 @@ export default function Product(props) {
 
     return (
             <div className="row space-between">
-                <Modal product={isProduct} isShowing={isShowing} hide={toggle}/>
+                <Modal onAdd={onAdd} product={isProduct} isShowing={isShowing} hide={toggle}/>
 
                     {
                         menuItem.map((product) => {       
                         return <div key={product.name}className="product">
-                            <button  onClick={(e) => toggle(product)} > Description</button>
-                            <img className="small" src={product.image} alt={product.name}></img>
+                            <img onClick={(e) => toggle(product)} className="small" src={product.image} alt={product.name}></img>
                             <h3>{product.name}</h3>
                             <div>€{product.price}</div>
                             <div>

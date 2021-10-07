@@ -1,3 +1,5 @@
+/*** Général ***/
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -22,6 +24,10 @@ a {
   text-decoration: none;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -29,19 +35,23 @@ a {
   
 }
 
-
 .space-between {
   justify-content: space-between;
 }
-
 
 .col-1 {
   flex: 1;
 }
 
 .col-2 {
-  flex: 2;
+  flex: 4;
 }
+
+.row.center {
+  align-items: center;
+}
+
+/*** Composants ***/
 
 .block {
   background-color: #e0e0e0;
@@ -50,19 +60,25 @@ a {
   border-radius: 0.5rem;
 }
 
-.row.center {
-  align-items: center;
-}
-
 img.small {
-  width: 10rem;
-  height: 8rem;
+  width: 20rem;
+  height: 16rem;
+  border-radius: 10%;
 }
 
 .product {
-  width: 10rem;
+  text-align: center;
+  width: 20rem;
+  
 }
 
+img[alt*="panier"] {
+  width: 50px;
+  height: 50px;
+}
+
+
+/*** bouton ***/
 .btn {
   font-size: 0.8rem;
   padding: 0.2rem;
@@ -81,7 +97,6 @@ img.small {
   width: 100%;
 }
 
-
 .btn.add {
   background-color: #40c0f0;
   width: 1.5rem;
@@ -99,18 +114,8 @@ img.small {
   width: 1.5rem;
 
 }
-
 .buttons {
   display: flex;
-}
-
-.text-right {
-  text-align: right;
-}
-
-img[alt*="panier"] {
-  width: 50px;
-  height: 50px;
 }
 
 /* Modal */
@@ -145,7 +150,7 @@ img[alt*="panier"] {
 
 .modal {
   z-index: 100;
-  background: white;
+  background: #e0e0e0;
   position: relative;
   margin: 1.75rem auto;
   border-radius: 3px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Modal = ({ isShowing, hide, product }) => isShowing ? ReactDOM.createPortal(
+const Modal = ({ isShowing, hide, product, onAdd }) => isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay"/>
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -14,6 +14,8 @@ const Modal = ({ isShowing, hide, product }) => isShowing ? ReactDOM.createPorta
         <p>
           <img className="small" src={product.image} alt={product.name}></img>
           {product.description}
+          <button className="btn btn-product" onClick={() => onAdd(product)}>Add To Cart</button>
+
         </p>
       </div>
     </div>
